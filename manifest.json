@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "MarkLine",
+  "version": "1.0.0",
+  "description": "Save timestamps and bookmark YouTube videos for quick access.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting", 
+    "activeTab",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://*.youtube.com/*"
+  ],
+  "icons": {
+    "16": "./src/img/icon.png",
+    "32": "./src/img/icon.png",
+    "48": "./src/img/icon.png",
+    "128": "./src/img/icon.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./src/js/content.js"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "./src/js/background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "./src/img/logo.png",
+      "32": "./src/img/logo.png",
+      "48": "./src/img/logo.png",
+      "128": "./src/img/logo.png"
+    },
+    "default_title": "Open Tools",
+    "default_popup": "popup.html"
+  }
+}

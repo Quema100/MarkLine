@@ -1,0 +1,93 @@
+#timeline {
+    margin-top: 50px;
+    width: 300px;
+    height: 350px;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#timeline>section {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#timeline>section>#timelineList {
+    width: 270px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px 0 15px;
+    list-style: none;
+}
+
+#timeline>section>#buttondiv>#saveTimestamp {
+    width: 50%;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff0000;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+#timeline>section>#buttondiv>#saveTimestamp:hover {
+    background-color: #e60000;
+    transform: scale(1.02);
+}
+
+#timeline>section>#buttondiv>#saveTimestamp:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode #timeline>section>#buttondiv>#saveTimestamp {
+    width: 50%;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff0000;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode #timeline>section>#buttondiv>#saveTimestamp {
+    width: 50%;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff0000;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+body.dark-mode #timeline>section>#buttondiv>#saveTimestamp:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
+}
+
+body.light-mode #timeline>section>#buttondiv>#saveTimestamp:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}

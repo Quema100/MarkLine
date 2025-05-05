@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link sizes="16x16" href="src/img/icon.png" rel="icon" type="image/x-icon">
+
+    <title>MarkLine</title>
+
+    <link rel="stylesheet" href="./src/css/header.css">
+    <link rel="stylesheet" href="./src/css/timeline.css">
+    <link rel="stylesheet" href="./src/css/bookmark.css">
+    <link rel="stylesheet" href="./src/css/popup.css">
+
+    <script src="./src/js/popup.js" defer></script>
+    <script src="./src/js/event.js"></script>
+    <script src="./src/js/utils.js"></script>
+    <script src="./src/js/Timeline.js"></script>
+    <script src="./src/js/BookMark.js"></script>
+    
+</head>
+
+<body>
+    <header>
+        <div id="logolink"><img src="./src/img/logo.png" id="openLink" class="link-icon" alt="Open Link" title="open Link"></div>
+        <nav class="navbar">
+            <ul>
+                <li>
+                    <a href="#timeline" class="home" id="nav">Timeline</a>
+                </li>
+                <li>
+                    <a href="#bookmark" class="timeline">Bookmark</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="toggle-container">
+            <input type="checkbox" id="mode-toggle">
+            <label for="mode-toggle" class="toggle-label">
+                <span class="sun">☀️</span>
+                <span class="moon">🌙</span>
+            </label>
+        </div>
+    </header>
+    <main>
+        <div id="timeline">
+            <h3 id="title">TimeLine</h3>
+            <section>
+                <ul id="timelineList"></ul>
+                <div id="buttondiv">
+                    <button id="saveTimestamp">Save Timestamp</button>
+                </div>
+            </section>
+        </div>
+        <div id="bookmark">
+            <h3 id="title">BookMark</h3>
+            <section>
+                <ul id="bookmarkList"></ul>
+                <div id="buttondiv">
+                    <button id="addBookmark">Add Bookmark</button>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
