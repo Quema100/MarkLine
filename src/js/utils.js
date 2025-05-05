@@ -23,7 +23,7 @@ const attachHandlers = () => {
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 func: secs => {
-                    const video = document.querySelector('video');
+                    const video = document.querySelectorAll('video')[0];
                     if (video) video.currentTime = secs;
                 },
                 args: [seconds]
@@ -40,9 +40,22 @@ const attachHandlers = () => {
 
 const saveItem = (key, value) => {
     chrome.storage.local.get([key], data => {
+
         const list = data[key] || [];
+
+        const isDuplicate = list.some(item => 
+            item.url === value.url && item.time === value.time
+        );
+
+        if (isDuplicate) {
+            console.log('🔁 Duplicate entry skipped:', value);
+            return;
+        }
+
         list.push(value);
-        console.log(list)
+
+        console.log('✅ New item saved:', value);
+
         chrome.storage.local.set({ [key]: list }, renderLists);
     });
 }
