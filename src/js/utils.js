@@ -2,15 +2,82 @@ const renderLists = () => {
     const timelineList = document.getElementById('timelineList');
     const bookmarkList = document.getElementById('bookmarkList');
     chrome.storage.local.get(['timelines', 'bookmarks'], data => {
-        timelineList.innerHTML = (data.timelines || []).map(item =>
-            `<li><span data-time="${item.time}" data-url="${item.url}">${item.title} ${item.time}</span><button data-delete-timeline="${item.title}|${item.time}|${item.url}">x</button></li>`
-        ).join('');
+
+        const timelineItems = data.timelines || [];
+        const groupedTimelines = groupItemsByUrl(timelineItems); // 동일한 URL로 그룹화
+
+        timelineList.innerHTML = Object.entries(groupedTimelines).map(([url, items]) => {
+            if (items.length === 1) {
+                return `
+                    <li>
+                        <span data-time="${items[0].time}" data-url="${url}">
+                            ${items[0].title} ${items[0].time}
+                        </span>
+                        <button data-delete-timeline="${items[0].title}|${items[0].time}|${url}">x</button>
+                    </li>`;
+            } else {
+                const dropdownOptions = items.map(item =>
+                    `<p>
+                        <span data-time="${item.time}" data-url="${item.url}">
+                            ${item.time}
+                        </span>
+                        <button data-delete-timeline="${item.title}|${item.time}|${item.url}">x</button>
+                    </p>`
+                ).join('');
+                return `
+                    <li>
+                        <details name="timelinelists">
+                            <summary>${items[0].title} (${items.length} timelines)</summary>
+                            ${dropdownOptions}
+                        </details>
+                    </li>`;
+            }
+        }).join('');
+
         bookmarkList.innerHTML = (data.bookmarks || []).map(item =>
-            `<li><span data-url="${item.url}">${item.title}</span><button data-delete-bookmark="${item.title}|${item.url}">x</button></li>`
+            `<li>
+                <span data-url="${item.url}">${item.title}</span>
+                <button data-delete-bookmark="${item.title}|${item.url}">x</button>
+            </li>`
         ).join('');
+
         attachHandlers();
+        keepDetailsOpen()
     });
-}
+};
+
+let summaryclick = false
+
+const keepDetailsOpen = () => {
+    document.querySelectorAll('details').forEach((details) => {
+        document.querySelectorAll('summary').forEach(summary => {
+            summary.addEventListener('click', () => {
+                summaryclick = true
+            });
+
+            const isOpen = details.hasAttribute('open');
+
+            if (!isOpen && summaryclick === true) {
+                details.setAttribute('open', '');
+            }
+    
+            if (isOpen && summaryclick === true) {
+                details.removeAttribute('open');
+            }
+        });
+    });
+};
+
+const groupItemsByUrl = (items) => {
+    return items.reduce((groups, item) => {
+        if (!groups[item.url]) {
+            groups[item.url] = [];
+        }
+        groups[item.url].push(item);
+        return groups;
+    }, {});
+};
+
 
 const attachHandlers = () => {
     document.querySelectorAll('[data-time]').forEach(element =>
