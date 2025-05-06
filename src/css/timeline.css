@@ -19,6 +19,7 @@
 }
 
 #timeline>section>#timelineList {
+    overflow-y: scroll;
     width: 270px;
     height: 250px;
     display: flex;
