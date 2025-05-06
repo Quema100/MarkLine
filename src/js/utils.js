@@ -1,10 +1,12 @@
+const summaryclickMap = new Map();
+
 const renderLists = () => {
     const timelineList = document.getElementById('timelineList');
     const bookmarkList = document.getElementById('bookmarkList');
     chrome.storage.local.get(['timelines', 'bookmarks'], data => {
 
         const timelineItems = data.timelines || [];
-        const groupedTimelines = groupItemsByUrl(timelineItems); // 동일한 URL로 그룹화
+        const groupedTimelines = groupItemsByUrl(timelineItems);
 
         timelineList.innerHTML = Object.entries(groupedTimelines).map(([url, items]) => {
             if (items.length === 1) {
@@ -13,7 +15,7 @@ const renderLists = () => {
                         <span data-time="${items[0].time}" data-url="${url}">
                             ${items[0].title} ${items[0].time}
                         </span>
-                        <button data-delete-timeline="${items[0].title}|${items[0].time}|${url}">x</button>
+                        <button data-delete-timeline="${items[0].title}@${items[0].time}@${url}">x</button>
                     </li>`;
             } else {
                 const dropdownOptions = items.map(item =>
@@ -21,7 +23,7 @@ const renderLists = () => {
                         <span data-time="${item.time}" data-url="${item.url}">
                             ${item.time}
                         </span>
-                        <button data-delete-timeline="${item.title}|${item.time}|${item.url}">x</button>
+                        <button data-delete-timeline="${item.title}@${item.time}@${item.url}">x</button>
                     </p>`
                 ).join('');
                 return `
@@ -37,7 +39,7 @@ const renderLists = () => {
         bookmarkList.innerHTML = (data.bookmarks || []).map(item =>
             `<li>
                 <span data-url="${item.url}">${item.title}</span>
-                <button data-delete-bookmark="${item.title}|${item.url}">x</button>
+                <button data-delete-bookmark="${item.title}@${item.url}">x</button>
             </li>`
         ).join('');
 
@@ -46,25 +48,25 @@ const renderLists = () => {
     });
 };
 
-let summaryclick = false
-
 const keepDetailsOpen = () => {
-    document.querySelectorAll('details').forEach((details) => {
-        document.querySelectorAll('summary').forEach(summary => {
-            summary.addEventListener('click', () => {
-                summaryclick = true
-            });
+    document.querySelectorAll('details').forEach((details,index) => {
+        const summary = details.querySelector('summary');
 
-            const isOpen = details.hasAttribute('open');
-
-            if (!isOpen && summaryclick === true) {
-                details.setAttribute('open', '');
-            }
-    
-            if (isOpen && summaryclick === true) {
-                details.removeAttribute('open');
+        details.addEventListener('toggle', () => {
+            if (details.open) {
+                console.log(`${summary.innerText} opened`);
+                summaryclickMap.set(`details_${index}`, true); 
+            } else {
+                console.log(`${summary.innerText} closed`);
+                summaryclickMap.set(`details_${index}`, false); 
             }
         });
+
+        const isOpen = details.hasAttribute('open');
+        const summaryclick = summaryclickMap.get(`details_${index}`);
+        if (!isOpen && summaryclick === true) {
+            details.setAttribute('open', '');
+        } 
     });
 };
 
@@ -143,14 +145,14 @@ const attachHandlers = () => {
 
     document.querySelectorAll('[data-delete-timeline]').forEach(element => {
         element.addEventListener('click', () => {
-            const [title, time, url] = element.dataset.deleteTimeline.split('|');
+            const [title, time, url] = element.dataset.deleteTimeline.split('@');
             deleteItem('timelines', { title, time, url });
         });
     });
 
     document.querySelectorAll('[data-delete-bookmark]').forEach(element => {
         element.addEventListener('click', () => {
-            const [title, url] = element.dataset.deleteBookmark.split('|');
+            const [title, url] = element.dataset.deleteBookmark.split('@');
             deleteItem('bookmarks', { title, url });
         });
     });

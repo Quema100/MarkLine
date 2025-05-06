@@ -8,13 +8,14 @@ const bookmark = () => {
       target: { tabId: tab.id },
       func: () => {
         const titleElement = document.querySelector('h1.title.style-scope.ytd-video-primary-info-renderer');
+        const [href] = location.href.split('&')
         if (titleElement) {
           const title = titleElement.textContent.trim();
           console.log('YouTube Video Title:', title);
-          return { title: title, url: location.href };
+          return { title: title, url: href };
         } else {
           console.log('Not found title');
-          return { title: null, url: location.href };
+          return { title: null, url: href };
         }
 
       }
