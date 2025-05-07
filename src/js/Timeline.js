@@ -3,8 +3,24 @@ let messageSend = false
 chrome.tabs.query({ active: true }, ([tab]) => {
     const isVideo = /youtube\.com\/watch/.test(tab.url);
     const saveTimestamp = document.getElementById('saveTimestamp')
+    const output = document.getElementById('timeline-output')
+
     if (saveTimestamp) {
         saveTimestamp.disabled = !isVideo;
+        if (isVideo === false) {
+            setTimeout(() => {
+                output.textContent = "Only works on YouTube video pages."
+                output.classList.add('visible');
+
+                setTimeout(() => {
+                    output.classList.remove('visible');
+
+                    setTimeout(() => {
+                        output.textContent = null;
+                    }, 500);
+                }, 3000);
+            }, 1000);
+        }
     }
 })
 
@@ -52,7 +68,7 @@ const timeline = () => {
                         messageSend = false;
                     }, 500); 
                 }, 3000);
-                
+
                 return ;
             }
             console.log(res)

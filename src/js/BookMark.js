@@ -1,8 +1,24 @@
 chrome.tabs.query({ active: true }, ([tab]) => {
     const isVideo = /youtube\.com\/(watch|shorts)/.test(tab.url);
     const addBookmark = document.getElementById('addBookmark');
+    const output = document.getElementById('bookmark-output')
+
     if (addBookmark) {
         addBookmark.disabled = !isVideo;
+        if (isVideo === false) {
+            setTimeout(() => {
+                output.textContent = "Only works on YouTube video pages."
+                output.classList.add('visible');
+
+                setTimeout(() => {
+                    output.classList.remove('visible');
+
+                    setTimeout(() => {
+                        output.textContent = null;
+                    }, 500);
+                }, 3000);
+            }, 1000);
+        }
     }
 })
 

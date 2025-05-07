@@ -113,4 +113,10 @@ body.light-mode #bookmark>section>#buttondiv>#addBookmark:active {
 #bookmark-output {
     font-size: 120%;
     font-family: monospace;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#bookmark-output.visible {
+    opacity: 1;
 }
