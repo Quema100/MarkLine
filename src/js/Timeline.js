@@ -1,3 +1,5 @@
+let messageSend = false
+
 chrome.tabs.query({ active: true }, ([tab]) => {
     const isVideo = /youtube\.com\/watch/.test(tab.url);
     const saveTimestamp = document.getElementById('saveTimestamp')
@@ -34,9 +36,28 @@ const timeline = () => {
                 }
             }
         }, ([res]) => {
+            if (!res?.result) {
+                if (messageSend) return console.log('Message already sent.');
+
+                messageSend = true;
+
+                output.textContent = "An advertisement is currently playing."
+                output.classList.add('visible');
+
+                setTimeout(() => {
+                    output.classList.remove('visible');
+
+                    setTimeout(() => {
+                        output.textContent = null;
+                        messageSend = false;
+                    }, 500); 
+                }, 3000);
+                
+                return ;
+            }
             console.log(res)
-            if (!res?.result) return output.textContent = "An advertisement is currently playing.", setTimeout(() => { output.textContent = null}, 3000);
-            if (res?.result) saveItem('timelines', res.result);
+
+            saveItem('timelines', res.result);
         });
     });
 }

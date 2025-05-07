@@ -113,4 +113,10 @@ body.light-mode #timeline>section>#buttondiv>#saveTimestamp:active {
 #timeline-output {
     font-size: 120%;
     font-family: monospace;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#timeline-output.visible {
+    opacity: 1;
 }
