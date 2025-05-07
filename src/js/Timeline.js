@@ -1,8 +1,17 @@
+chrome.tabs.query({ active: true }, ([tab]) => {
+    const isVideo = /youtube\.com\/watch/.test(tab.url);
+    const saveTimestamp = document.getElementById('saveTimestamp')
+    if (saveTimestamp) {
+        console.log(saveTimestamp)
+        saveTimestamp.disabled = !isVideo;
+    }
+})
+
 const timeline = () => {
     const saveTimestamp = document.getElementById('saveTimestamp')
     saveTimestamp.addEventListener('click', async () => {
         let [tab] = await chrome.tabs.query({ active: true });
-        if (!tab.url.includes('/watch')) return console.log(tab.url.includes('/watch'));
+        if (!/youtube\.com\/watch/.test(tab.url)) return console.log(/youtube\.com\/watch/.test(tab.url));
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
             func: () => {

@@ -19,19 +19,6 @@
     "48": "./src/img/icon.png",
     "128": "./src/img/icon.png"
   },
-  "content_scripts": [
-    {
-      "js": [
-        "./src/js/content.js"
-      ],
-      "matches": [
-        "https://*.youtube.com/*"
-      ]
-    }
-  ],
-  "background": {
-    "service_worker": "./src/js/background.js"
-  },
   "action": {
     "default_icon": {
       "16": "./src/img/logo.png",

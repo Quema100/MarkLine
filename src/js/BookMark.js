@@ -1,9 +1,18 @@
+chrome.tabs.query({ active: true }, ([tab]) => {
+  const isVideo = /youtube\.com\/(watch|shorts)/.test(tab.url);
+  const addBookmark = document.getElementById('addBookmark');
+  if (addBookmark) {
+    console.log(addBookmark)
+    addBookmark.disabled = !isVideo;
+  }
+})
+
 const bookmark = () => {
   const addBookmark = document.getElementById('addBookmark')
 
   addBookmark.addEventListener('click', async () => {
     let [tab] = await chrome.tabs.query({ active: true });
-    if (!/\/(shorts|watch)/.test(tab.url)) return console.log(!/\/(shorts|watch)/.test(tab.url));
+    if (!/youtube\.com\/(watch|shorts)/.test(tab.url)) return console.log(!/youtube\.com\/(watch|shorts)/.test(tab.url));
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: () => {

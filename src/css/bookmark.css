@@ -67,13 +67,17 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+#bookmark>section>#buttondiv>#addBookmark:disabled {
+    background-color: #adadad;
+    cursor: not-allowed;
+}
+
 body.dark-mode #bookmark>section>#buttondiv>#addBookmark {
     width: 50%;
     padding: 10px 12px;
     margin: 6px 0;
     border: none;
     border-radius: 8px;
-    background-color: #ff0000;
     color: white;
     font-weight: bold;
     font-size: 14px;
@@ -88,7 +92,6 @@ body.light-mode #bookmark>section>#buttondiv>#addBookmark {
     margin: 6px 0;
     border: none;
     border-radius: 8px;
-    background-color: #ff0000;
     color: white;
     font-weight: bold;
     font-size: 14px;
