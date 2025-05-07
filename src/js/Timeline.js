@@ -2,13 +2,13 @@ chrome.tabs.query({ active: true }, ([tab]) => {
     const isVideo = /youtube\.com\/watch/.test(tab.url);
     const saveTimestamp = document.getElementById('saveTimestamp')
     if (saveTimestamp) {
-        console.log(saveTimestamp)
         saveTimestamp.disabled = !isVideo;
     }
 })
 
 const timeline = () => {
     const saveTimestamp = document.getElementById('saveTimestamp')
+    const output = document.getElementById('timeline-output')
     saveTimestamp.addEventListener('click', async () => {
         let [tab] = await chrome.tabs.query({ active: true });
         if (!/youtube\.com\/watch/.test(tab.url)) return console.log(/youtube\.com\/watch/.test(tab.url));
@@ -34,6 +34,8 @@ const timeline = () => {
                 }
             }
         }, ([res]) => {
+            console.log(res)
+            if (!res?.result) return output.textContent = "An advertisement is currently playing.", setTimeout(() => { output.textContent = null}, 3000);
             if (res?.result) saveItem('timelines', res.result);
         });
     });
