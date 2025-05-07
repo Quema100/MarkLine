@@ -1,7 +1,7 @@
 #bookmark {
     margin-top: 50px;
     width: 300px;
-    height: 350px;
+    height: 400px;
     float: right;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,20 @@
     flex-direction: column;
     padding: 0 15px 0 15px;
     list-style: none;
+}
+
+#bookmark>section>#bookmarkList::-webkit-scrollbar {
+    width: 5px;
+}
+
+#bookmark>section>#bookmarkList::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+}
+
+#bookmark>section>#bookmarkList::-webkit-scrollbar-thumb {
+    background: #a1a1a183;
+    border-radius: 30px;
 }
 
 #bookmark>section>#buttondiv>#addBookmark {

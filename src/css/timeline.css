@@ -1,7 +1,7 @@
 #timeline {
     margin-top: 50px;
     width: 300px;
-    height: 350px;
+    height: 400px;
     float: left;
     display: flex;
     flex-direction: column;
@@ -20,12 +20,26 @@
 
 #timeline>section>#timelineList {
     overflow-y: scroll;
-    width: 270px;
+    width: 275px;
     height: 250px;
     display: flex;
     flex-direction: column;
-    padding: 0 15px 0 15px;
+    padding: 0 10px 0 15px;
     list-style: none;
+}
+
+#timeline>section>#timelineList::-webkit-scrollbar {
+    width: 5px;
+}
+
+#timeline>section>#timelineList::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+}
+
+#timeline>section>#timelineList::-webkit-scrollbar-thumb {
+    background: #a1a1a183;
+    border-radius: 30px;
 }
 
 #timeline>section>#buttondiv>#saveTimestamp {
