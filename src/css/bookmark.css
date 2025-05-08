@@ -49,6 +49,13 @@
 #bookmark>section>#bookmarkList>li>button {
     width: 25px;
     height: 25px;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: #ff0000;
 }
 
 #bookmark>section>#bookmarkList::-webkit-scrollbar {

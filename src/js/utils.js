@@ -13,7 +13,7 @@ const renderLists = () => {
                 return `
                     <li>
                         <span data-time="${items[0].time}" data-url="${url}">
-                            ${items[0].title.length > 18 ? items[0].title.slice(0, 18) + '...' : items[0].title} ${items[0].time}
+                            ${Array.from(items[0].title).length > 17 ? Array.from(items[0].title).slice(0, 17).join('') + '...' : items[0].title} ${items[0].time}
                         </span>
                         <button data-delete-timeline="${items[0].title}@${items[0].time}@${url}">x</button>
                     </li>`;
@@ -29,7 +29,9 @@ const renderLists = () => {
                 return `
                     <li>
                         <details name="timelinelists">
-                            <summary>${items[0].title.length > 18 ? items[0].title.slice(0, 18) + '...' : items[0].title} (${items.length} timelines)</summary>
+                            <summary>
+                                ${Array.from(items[0].title).length > 16 ? Array.from(items[0].title).slice(0, 16).join('') + '...' : items[0].title} (${items.length} timelines)
+                            </summary>
                             ${dropdownOptions}
                         </details>
                     </li>`;
@@ -38,7 +40,7 @@ const renderLists = () => {
 
         bookmarkList.innerHTML = (data.bookmarks || []).map(item =>
             `<li>
-                <span data-url="${item.url}">${item.title.length > 18 ? item.title.slice(0, 18) + '...' : item.title}</span>
+                <span data-url="${item.url}">${Array.from(item.title).length > 21 ? Array.from(item.title).slice(0, 21).join('') + '...' : item.title}</span>
                 <button data-delete-bookmark="${item.title}@${item.url}">x</button>
             </li>`
         ).join('');
@@ -49,16 +51,16 @@ const renderLists = () => {
 };
 
 const keepDetailsOpen = () => {
-    document.querySelectorAll('details').forEach((details,index) => {
+    document.querySelectorAll('details').forEach((details, index) => {
         const summary = details.querySelector('summary');
 
         details.addEventListener('toggle', () => {
             if (details.open) {
                 console.log(`${summary.innerText} opened`);
-                summaryclickMap.set(`details_${index}`, true); 
+                summaryclickMap.set(`details_${index}`, true);
             } else {
                 console.log(`${summary.innerText} closed`);
-                summaryclickMap.set(`details_${index}`, false); 
+                summaryclickMap.set(`details_${index}`, false);
             }
         });
 
@@ -66,7 +68,7 @@ const keepDetailsOpen = () => {
         const summaryclick = summaryclickMap.get(`details_${index}`);
         if (!isOpen && summaryclick === true) {
             details.setAttribute('open', '');
-        } 
+        }
     });
 };
 
