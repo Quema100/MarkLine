@@ -13,7 +13,7 @@ const renderLists = () => {
                 return `
                     <li>
                         <span data-time="${items[0].time}" data-url="${url}">
-                            ${items[0].title} ${items[0].time}
+                            ${items[0].title.length > 18 ? items[0].title.slice(0, 18) + '...' : items[0].title} ${items[0].time}
                         </span>
                         <button data-delete-timeline="${items[0].title}@${items[0].time}@${url}">x</button>
                     </li>`;
@@ -29,7 +29,7 @@ const renderLists = () => {
                 return `
                     <li>
                         <details name="timelinelists">
-                            <summary>${items[0].title} (${items.length} timelines)</summary>
+                            <summary>${items[0].title.length > 18 ? items[0].title.slice(0, 18) + '...' : items[0].title} (${items.length} timelines)</summary>
                             ${dropdownOptions}
                         </details>
                     </li>`;
@@ -38,7 +38,7 @@ const renderLists = () => {
 
         bookmarkList.innerHTML = (data.bookmarks || []).map(item =>
             `<li>
-                <span data-url="${item.url}">${item.title}</span>
+                <span data-url="${item.url}">${item.title.length > 18 ? item.title.slice(0, 18) + '...' : item.title}</span>
                 <button data-delete-bookmark="${item.title}@${item.url}">x</button>
             </li>`
         ).join('');

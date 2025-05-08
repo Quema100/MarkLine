@@ -31,6 +31,8 @@ const bookmark = () => {
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
             func: () => {
+                const isShorts = window.location.pathname.includes("/shorts");
+                const isLongForm = window.location.pathname.includes("/watch");
                 const titleElement = document.querySelector('h1.title.style-scope.ytd-video-primary-info-renderer');
                 const shortstitleElement = document.querySelector('h2.ytShortsVideoTitleViewModelShortsVideoTitle');
                 const [href] = location.href.split('&');
@@ -38,10 +40,10 @@ const bookmark = () => {
                 const title = titleElement ? titleElement.textContent.trim() : null;
                 const shortstitle = shortstitleElement ? shortstitleElement.textContent.trim() : null;
 
-                if (title) {
+                if (isLongForm && title) {
                     console.log('YouTube Video Title:', title);
                     return { title: title, url: href };
-                } else if (shortstitle) {
+                } else if (isShorts && shortstitle) {
                     console.log('YouTube Shorts Video Title:', shortstitle);
                     return { title: shortstitle, url: href };
                 } else {
