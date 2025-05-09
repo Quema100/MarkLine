@@ -16,7 +16,7 @@ const renderLists = () => {
                             ${Array.from(items[0].title).length > 17 ? Array.from(items[0].title).slice(0, 17).join('') + '...' : items[0].title} ${items[0].time}
                         </span>
                         <div id='Timelinebtn'>
-                            <button data-delete-timeline='${items[0].title}@${items[0].time}@${url}'>x</button>
+                            <button data-delete-timeline="${items[0].title}@${items[0].time}@${url}">x</button>
                         </div>
                     </li>`;
             } else {
@@ -26,7 +26,7 @@ const renderLists = () => {
                             ${item.time}
                         </span>
                         <div id='Timelinebtn'>
-                            <button data-delete-timeline='${item.title}@${item.time}@${item.url}'>x</button>
+                            <button data-delete-timeline="${item.title}@${item.time}@${item.url}">x</button>
                         </div>
                     </li>`
                 ).join('');
@@ -48,7 +48,7 @@ const renderLists = () => {
             `<li>
                 <span data-url='${item.url}'>${Array.from(item.title).length > 21 ? Array.from(item.title).slice(0, 21).join('') + '...' : item.title}</span>
                 <div id='Bookmarkbtn'>
-                    <button data-delete-bookmark='${item.title}@${item.url}'>x</button>
+                    <button data-delete-bookmark="${item.title}@${item.url}">x</button>
                 </div>
             </li>`
         ).join('');

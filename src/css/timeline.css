@@ -85,7 +85,7 @@
     width: 5px;
     height: 5px;
     position: absolute;
-    right: 5%;
+    right: 3.5%;
     top: 50%;
     border: solid #ffffff;
     border-width: 3px 3px 0 0;
@@ -103,7 +103,7 @@ body.light-mode #timeline>section>#timelineList>li>details>summary::after {
     width: 5px;
     height: 5px;
     position: absolute;
-    right: 5%;
+    right: 3.5%;
     top: 50%;
     border: solid #000000;
     border-width: 3px 3px 0 0;
@@ -117,7 +117,7 @@ body.dark-mode #timeline>section>#timelineList>li>details>summary::after {
     width: 5px;
     height: 5px;
     position: absolute;
-    right: 5%;
+    right: 3.5%;
     top: 50%;
     border: solid #ffffff;
     border-width: 3px 3px 0 0;
