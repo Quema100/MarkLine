@@ -12,19 +12,23 @@ const renderLists = () => {
             if (items.length === 1) {
                 return `
                     <li>
-                        <span data-time="${items[0].time}" data-url="${url}">
+                        <span data-time='${items[0].time}' data-url='${url}'>
                             ${Array.from(items[0].title).length > 17 ? Array.from(items[0].title).slice(0, 17).join('') + '...' : items[0].title} ${items[0].time}
                         </span>
-                        <button data-delete-timeline="${items[0].title}@${items[0].time}@${url}">x</button>
+                        <div id='Timelinebtn'>
+                            <button data-delete-timeline='${items[0].title}@${items[0].time}@${url}'>x</button>
+                        </div>
                     </li>`;
             } else {
                 const dropdownOptions = items.map(item =>
-                    `<p>
-                        <span data-time="${item.time}" data-url="${item.url}">
+                    `<li>
+                        <span data-time='${item.time}' data-url='${item.url}'>
                             ${item.time}
                         </span>
-                        <button data-delete-timeline="${item.title}@${item.time}@${item.url}">x</button>
-                    </p>`
+                        <div id='Timelinebtn'>
+                            <button data-delete-timeline='${item.title}@${item.time}@${item.url}'>x</button>
+                        </div>
+                    </li>`
                 ).join('');
                 return `
                     <li>
@@ -32,7 +36,9 @@ const renderLists = () => {
                             <summary>
                                 ${Array.from(items[0].title).length > 16 ? Array.from(items[0].title).slice(0, 16).join('') + '...' : items[0].title} (${items.length} timelines)
                             </summary>
-                            ${dropdownOptions}
+                            <ul>
+                                ${dropdownOptions}
+                            </ul>
                         </details>
                     </li>`;
             }
@@ -40,8 +46,10 @@ const renderLists = () => {
 
         bookmarkList.innerHTML = (data.bookmarks || []).map(item =>
             `<li>
-                <span data-url="${item.url}">${Array.from(item.title).length > 21 ? Array.from(item.title).slice(0, 21).join('') + '...' : item.title}</span>
-                <button data-delete-bookmark="${item.title}@${item.url}">x</button>
+                <span data-url='${item.url}'>${Array.from(item.title).length > 21 ? Array.from(item.title).slice(0, 21).join('') + '...' : item.title}</span>
+                <div id='Bookmarkbtn'>
+                    <button data-delete-bookmark='${item.title}@${item.url}'>x</button>
+                </div>
             </li>`
         ).join('');
 
@@ -148,6 +156,7 @@ const attachHandlers = () => {
     document.querySelectorAll('[data-delete-timeline]').forEach(element => {
         element.addEventListener('click', () => {
             const [title, time, url] = element.dataset.deleteTimeline.split('@');
+            console.log(title, time, url)
             deleteItem('timelines', { title, time, url });
         });
     });
