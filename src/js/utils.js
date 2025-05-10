@@ -16,20 +16,21 @@ const renderLists = () => {
                             ${Array.from(items[0].title).length > 17 ? Array.from(items[0].title).slice(0, 17).join('') + '...' : items[0].title} ${items[0].time}
                         </span>
                         <div id='Timelinebtn'>
-                            <button data-delete-timeline="${items[0].title}@${items[0].time}@${url}">x</button>
+                            <button data-delete-timeline="${items[0].title}§${items[0].time}§${url}">x</button>
                         </div>
                     </li>`;
             } else {
                 const dropdownOptions = items.map(item =>
                     `<li>
                         <span data-time='${item.time}' data-url='${item.url}'>
-                            ${item.time}
+                            🕒 Time: [${item.time}]
                         </span>
                         <div id='Timelinebtn'>
-                            <button data-delete-timeline="${item.title}@${item.time}@${item.url}">x</button>
+                            <button data-delete-timeline="${item.title}§${item.time}§${item.url}">x</button>
                         </div>
                     </li>`
                 ).join('');
+
                 return `
                     <li>
                         <details name="timelinelists">
@@ -48,7 +49,7 @@ const renderLists = () => {
             `<li>
                 <span data-url='${item.url}'>${Array.from(item.title).length > 21 ? Array.from(item.title).slice(0, 21).join('') + '...' : item.title}</span>
                 <div id='Bookmarkbtn'>
-                    <button data-delete-bookmark="${item.title}@${item.url}">x</button>
+                    <button data-delete-bookmark="${item.title}§${item.url}">x</button>
                 </div>
             </li>`
         ).join('');
@@ -155,7 +156,7 @@ const attachHandlers = () => {
 
     document.querySelectorAll('[data-delete-timeline]').forEach(element => {
         element.addEventListener('click', () => {
-            const [title, time, url] = element.dataset.deleteTimeline.split('@');
+            const [title, time, url] = element.dataset.deleteTimeline.split('§');
             console.log(title, time, url)
             deleteItem('timelines', { title, time, url });
         });
@@ -163,7 +164,7 @@ const attachHandlers = () => {
 
     document.querySelectorAll('[data-delete-bookmark]').forEach(element => {
         element.addEventListener('click', () => {
-            const [title, url] = element.dataset.deleteBookmark.split('@');
+            const [title, url] = element.dataset.deleteBookmark.split('§');
             deleteItem('bookmarks', { title, url });
         });
     });
