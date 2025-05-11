@@ -41,21 +41,21 @@
 
 #timeline>section>#timelineList>li>span {
     display: flex;
-    width: 90%;
+    width: 85%;
     height: 30px;
     align-items: center;
 }
 
 #timeline>section>#timelineList>li>#Timelinebtn {
     display: flex;
-    width: 10%;
+    width: 15%;
     height: 100%;
     justify-content: center;
     align-items: center;
 }
 
 #timeline>section>#timelineList>li>#Timelinebtn>button {
-    width: 25px;
+    width: 35px;
     height: 25px;
     border: none;
     border-radius: 8px;
@@ -64,6 +64,11 @@
     align-items: center;
     color: white;
     background: #ff0000;
+    transition: transform 0.3s;
+}
+
+#timeline>section>#timelineList>li>#Timelinebtn>button:hover {
+    transform: scale(1.05, 1.1);
 }
 
 #timeline>section>#timelineList>li>details {
@@ -154,21 +159,21 @@ body.dark-mode #timeline>section>#timelineList>li>details[open]>summary::after {
 #timeline>section>#timelineList>li>details>ul>li>span {
     font-size: 13px;
     display: flex;
-    width: 90%;
+    width: 85%;
     height: 30px;
     align-items: center;
 }
 
 #timeline>section>#timelineList>li>details>ul>li>#Timelinebtn {
     display: flex;
-    width: 10%;
+    width: 15%;
     height: 100%;
     justify-content: center;
     align-items: center;
 }
 
 #timeline>section>#timelineList>li>details>ul>li>#Timelinebtn>button {
-    width: 25px;
+    width: 35px;
     height: 25px;
     border: none;
     border-radius: 8px;
@@ -177,6 +182,11 @@ body.dark-mode #timeline>section>#timelineList>li>details[open]>summary::after {
     align-items: center;
     color: white;
     background: #ff0000;
+    transition: transform 0.3s;
+}
+
+#timeline>section>#timelineList>li>details>ul>li>#Timelinebtn>button:hover {
+    transform: scale(1.05, 1.1);
 }
 
 #timeline>section>#timelineList::-webkit-scrollbar {
