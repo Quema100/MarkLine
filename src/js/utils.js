@@ -114,10 +114,10 @@ const attachHandlers = () => {
                             const video = document.querySelector('video');
                             const ad_layout = document.querySelector('.ytp-ad-player-overlay-layout');
 
-                            if (!video ?? ad_layout) return false;
+                            if (!video || ad_layout) return false; // shit i can't sovle the ad problem...
 
 
-                            video.currentTime = secs;
+                            video.currentTime = secs; // plz wait..
                             return true;
                         },
                         args: [times],
@@ -135,7 +135,7 @@ const attachHandlers = () => {
                         const video = document.querySelectorAll('video')[0];
                         const ad_layout = document.querySelector('.ytp-ad-player-overlay-layout');
 
-                        if (!video ?? ad_layout) return false;
+                        if (!video || ad_layout) return false;
 
                         video.currentTime = secs;
                     },
