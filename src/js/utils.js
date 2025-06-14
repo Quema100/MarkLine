@@ -114,7 +114,8 @@ const attachHandlers = () => {
                             const video = document.querySelector('video');
                             const ad_layout = document.querySelector('.ytp-ad-player-overlay-layout');
 
-                            if (!video || ad_layout) return false;
+                            if (!video ?? ad_layout) return false;
+
 
                             video.currentTime = secs;
                             return true;
@@ -126,7 +127,7 @@ const attachHandlers = () => {
                             console.log('✅ Script executed successfully');
                         }
                     });
-                }, 1000);
+                }, 2000);
             } else {
                 chrome.scripting.executeScript({
                     target: { tabId: tab.id },
@@ -134,8 +135,7 @@ const attachHandlers = () => {
                         const video = document.querySelectorAll('video')[0];
                         const ad_layout = document.querySelector('.ytp-ad-player-overlay-layout');
 
-                        if (!video) return;
-                        if (ad_layout) return;
+                        if (!video ?? ad_layout) return false;
 
                         video.currentTime = secs;
                     },
